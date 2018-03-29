@@ -9,8 +9,12 @@ RUN apt-get update && \
     pip install --no-cache-dir confp && \
     apt-get clean
 
+RUN a2enconf zoneminder && \
+    a2enmod cgi && \
+    a2enmod rewrite
+
 WORKDIR /zm
 
 COPY cmd.sh confp.yml zm.conf.j2 ./
 
-CMD ["cmd.sh"]
+CMD ["./cmd.sh"]
