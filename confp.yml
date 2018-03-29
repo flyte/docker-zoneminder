@@ -1,0 +1,30 @@
+backends:
+  env:
+    type: env
+    prefix: ZM_
+
+templates:
+  - src: zm.conf.j2
+    dest: /etc/zm/zm.conf
+
+logging:
+  version: 1
+  formatters:
+    tabbed:
+      format: "%(asctime)s\t%(name)s\t%(levelname)s\t%(message)s"
+  handlers:
+    console:
+      class: logging.StreamHandler
+      formatter: tabbed
+      level: DEBUG
+  loggers:
+    confp:
+      level: DEBUG
+      handlers:
+        - console
+      propagate: yes
+    confp.__main__:
+      level: DEBUG
+      handlers:
+        - console
+      propagate: no
